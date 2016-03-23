@@ -15,7 +15,8 @@ public class Mutex {
 		this.threadIDList = new ArrayList<Thread>();
 	}
 	/**
-	 * Locks the current mutex
+	 * Locks the current mutex, if some thread already have the lock, the calling thread call's wait method.
+	 * In order to make a FIFO, we make a monitor(synchronized) of the current entrant thread.
 	 */
 	public void lock() throws InterruptedException{
 		System.out.println("Thread " + Thread.currentThread().getId() + " pediu o lock");
@@ -24,7 +25,7 @@ public class Mutex {
 			//debug
 			if(status > 0)
 			{
-				System.out.println("Thread " + Thread.currentThread().getId() + " est· em wait");
+				System.out.println("Thread " + Thread.currentThread().getId() + " est√° em wait");
 				threadIDList.add(Thread.currentThread());
 				Thread.currentThread().wait();	
 			}
@@ -33,13 +34,15 @@ public class Mutex {
 		return;
 	}
 	/**
-	 * Unlocks the current mutex
+	 * Unlocks the current mutex, only by the Thread that locked it.
+	 * The Synchronized method to guarantee only one thread in here, this avoid concurrent entrance who might bug the method.
+	 * After freeing the lock, the 1st Thread in the list is notified to continue his flow.
 	 */
 	public synchronized void unlock(){
 		if (status.longValue() == Thread.currentThread().getId())
 			{
 				status = (long) -1;
-				System.out.println("Thread " + Thread.currentThread().getId() + " est· notificando as outras threads ");
+				System.out.println("Thread " + Thread.currentThread().getId() + " est√° notificando as outras threads ");
 				if(!threadIDList.isEmpty())
 					synchronized (threadIDList.get(0))
 					{
