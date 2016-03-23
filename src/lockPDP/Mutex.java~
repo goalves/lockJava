@@ -3,17 +3,12 @@ package lockPDP;
 import java.util.ArrayList;
 
 public class Mutex {
-	/* Status of the current mutex
-		-1 : free
-		other values : is locked by the current thread that have the id stored in the value	
-	 */
+	/* Status of the current mutex */
 	private Long status;
 	
 	/* Array of threads waiting on the current mutex */
 	private ArrayList<Thread> threadIDList;
 	
-
-	/* The constructor sets the default status of the lock to free */
 	public Mutex()
 	{
 		this.status = (long)-1;

@@ -21,7 +21,7 @@ public class ThreadExample extends Thread {
         try {
 			mutex.lock();
 			Main.x = Main.x+1;
-			System.out.println("Thread " + Thread.currentThread().getId() + " changed X value to: " + Main.x);
+			//System.out.println("Thread " + Thread.currentThread().getId() + " changed X value to: " + Main.x);
 			mutex.unlock();
 		} catch (InterruptedException e) {
 			e.printStackTrace();

@@ -8,12 +8,9 @@ public class Main {
 	public static int x = 0;
 	
 	public static void main(String[] args) {
-		// Creates a new mutex
 		Mutex mutex;
 		mutex = new Mutex();
 		
-
-		// Creates the arary of threads to run the example
 		ArrayList<ThreadExample> threads;
 		threads = new ArrayList<ThreadExample>();
 		
@@ -26,8 +23,6 @@ public class Main {
 		{
 			System.out.print(t.getId() + " ");
 		}
-
-		// Run all the threads
 		System.out.println();
 		for(ThreadExample t : threads)
 		{
